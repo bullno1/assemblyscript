@@ -1,4 +1,5 @@
 abstract class BaseRegistry {
+  @lazy
   private static INSTANCES: BaseRegistry | null = null;
 
   private next: BaseRegistry | null = null;
@@ -42,7 +43,9 @@ export class FinalizationRegistry<T> extends BaseRegistry {
 }
 
 export class WeakRef<T> {
+  @lazy
   private static REFERENCES: Map<usize, u32> = new Map<usize, u32>();
+  @lazy
   private static CURRENT_COOKIE: u32 = 0;
 
   private ref: usize;
@@ -80,6 +83,4 @@ export class WeakRef<T> {
 // @ts-ignore: decorator
 @global
 function __finalize(ptr: usize): void {
-  BaseRegistry.finalizeAll(ptr);
-  WeakRef.clearAll(ptr);
 }
