@@ -2053,6 +2053,17 @@ declare class Set<K> {
   toString(): string;
 }
 
+declare class WeakRef<T> {
+  constructor(value: T);
+  deref(): T | null;
+}
+
+declare class FinalizationRegistry<T> {
+  constructor(cleanupCallback: (heldValue: T) => void);
+  register<U>(target: U, heldValue: T): void;
+  unregister<U>(target: U): void;
+}
+
 interface SymbolConstructor {
   readonly hasInstance: symbol;
   readonly isConcatSpreadable: symbol;
